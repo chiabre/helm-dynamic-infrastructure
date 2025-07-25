@@ -10,20 +10,23 @@ In the [details chapter](#details) you can have an overview of every objects cre
 > The previous method of passing credentials via the `registryKey` field in `values-custom.yaml` is still supported but **deprecated**.
 
 ## Prerequisites
+- A running [Kubernetes](https://kubernetes.io/) cluster (1.9.0 - 1.30.0)
+- [Helm](https://helm.sh/docs/intro/install/) CLI  (3.2+)
 
-- A running [Kubernetes](https://kubernetes.io/) cluster (v1.9.0–v1.30.0)  
-- [Helm](https://helm.sh/docs/intro/install/) CLI (v3.2+)
 
 ## Installation
 
-1. **Add (or update) the Neotys Helm repo**
+1. Add the Neotys chart repository or update it if you already had it registered
 
 ```bash		
 helm repo add neotys https://helm.prod.neotys.com/stable/
+```
+
+```bash		
 helm repo update
 ```
 
-2. **(if you need to pull private images) Create your registry pull secret (optional!)**
+2. (if you need to pull private images) Create your registry pull secret (optional!)
 
 ```bash
 kubectl create secret docker-registry my-registry-secret \
