@@ -1,10 +1,10 @@
 
-# Neoload Web Dynamic Infrastructure User Access
+# Neoload Web dynamic infrastructure user access
 
-## Introduction
+# Introduction
 
-This chart deploys the credentials required for NeoLoad Web Dynamic Infrastructure on a Kubernetes cluster.  
-In the [Details](#details) section you can find an overview of all objects created in the cluster.  
+This chart deploys user credentials to use Neoload Web Dynamic infrastructure on a Kubernetes cluster.
+In the [details chapter](#details) you can have an overview of every objects created in the cluster.
 
 > **Security note:** This chart supports using Kubernetes `imagePullSecrets` for secure access to private registries.  
 > The previous method of passing credentials via the `registryKey` field in `values-custom.yaml` is still supported but **deprecated**.
