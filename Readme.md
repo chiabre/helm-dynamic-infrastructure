@@ -38,33 +38,30 @@ kubectl create secret docker-registry my-registry-secret \
 > Replace REGISTRY_URL, USERNAME, PASSWORD and the secret name as needed.
 > If you manage secrets via GitOps, you can instead commit a Secret manifest to your repo.
 
-3. **(if you need to pull private images) Download and customize your values file (optional!)**
+3. (if you need to pull private images) Download and customize your values file (optional!)
 
 ```yml
 imagePullSecrets:
   - name: my-registry-secret
 ```
 
-5. **Create a dedicated namespace**
-
+4. Create a dedicated namespace
 ```bash		
 kubectl create namespace my-namespace
 ```
-> Or just use --create-namespace in the next step.
-
-4. **Install (or upgrade) the chart**
+5. Install with the following command
 
 ```bash		
-helm install my-release neotys/nlweb-dynamic-infrastructure \
-  -n my-namespace \
-  --create-namespace \
-  -f values-custom.yaml
+helm install my-release neotys/nlweb-dynamic-infrastructure -n my-namespace -f ./values-custom.yaml
 ```
+
+> Since Helm 3.2+ you can skip step 3, and add the --create-namespace option to this command
+> 
 > If you do not uses custom values you can remove "-f ./values-custom.yaml" from the command.
 
 ## Uninstall
 
-To remove the release:
+To uninstall the `my-release` deployment:
 
 ```bash
 $ helm uninstall my-release -n my-namespace
