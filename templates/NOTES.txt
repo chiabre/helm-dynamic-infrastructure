@@ -8,6 +8,27 @@ kubectl cluster-info | grep -e 'Kubernetes control plane' -e 'Kubernetes master'
 kubectl get secret {{ .Release.Name }}-secret -o jsonpath='{.data.token}' -n {{ .Release.Namespace }} | base64 --decode
 
 {{ if .Values.registryKey.enabled -}}
-4. To set the image pull secret:
-kubectl patch sa {{ .Release.Name }}-sa -p '{"imagePullSecrets": [{"name": "{{ .Release.Name }}-rk"}]}' -n {{ .Release.Namespace }}
+4. To set the image pull secret for legacy registryKey:
+kubectl patch sa {{ include "nlweb-dynamic-infrastructure-user.serviceAccountName" . }} -p '{"imagePullSecrets": [{"name": "{{ include "nlweb-dynamic-infrastructure-user.fullname" . }}-registry"}]}' -n {{ .Release.Namespace }}
 {{- end }}
+
+---
+
+⚠️ Note on Private Registry Authentication
+
+- The preferred method to provide Docker registry credentials is to create an image pull secret manually:
+
+  kubectl create secret docker-registry my-registry-secret \
+    --docker-server=REGISTRY_URL \
+    --docker-username=USERNAME \
+    --docker-password=PASSWORD \
+    --namespace={{ .Release.Namespace }}
+
+- Then set the secret name(s) in your values.yaml or values-custom.yaml:
+
+  imagePullSecrets:
+    - name: my-registry-secret
+
+- The `registryKey` option is deprecated and should only be used if you cannot manage imagePullSecrets.
+
+---

@@ -1,16 +1,14 @@
 rbac:
-  # Specifies whether RBAC resources should be created
   create: true
 
 serviceAccount:
-  # Specifies whether a ServiceAccount should be created
   create: true
-  # The name of the ServiceAccount to use.
-  # If not set and create is true, a name is generated using the fullname template
-  # name:
+  # name:  # Optional, if empty will be auto-generated
 
 registryKey:
-  enabled: false
-  registry: https://registry.hub.docker.com
-  username: userName
-  password: password
+  enabled: false # Deprecated - use imagePullSecrets instead
+  registry: https://index.docker.io/v1/
+  username: ""
+  password: ""
+
+imagePullSecrets: []  # list of existing Secret names for private registries
