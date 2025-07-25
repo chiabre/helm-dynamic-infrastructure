@@ -36,6 +36,7 @@ kubectl create secret docker-registry my-registry-secret \
   --namespace=my-namespace
 ``` 
 > Replace REGISTRY_URL, USERNAME, PASSWORD and the secret name as needed.
+> 
 > If you manage secrets via GitOps, you can instead commit a Secret manifest to your repo.
 
 3. (if you need to pull private images) Download and customize your values file (optional!)
@@ -49,6 +50,7 @@ imagePullSecrets:
 ```bash		
 kubectl create namespace my-namespace
 ```
+
 5. Install with the following command
 
 ```bash		
